@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(new Vector3(0, 0, 1) * Time.deltaTime * 5);//TODO : Just for test
+       
     }
 
     private void OnTriggerEnter(Collider collision)
@@ -69,6 +69,11 @@ public class PlayerController : MonoBehaviour
             Destroy(boats[boats.Count - 1]);
             boats.RemoveAt(boats.Count - 1);
         }
+    }
+
+    public void PlayerMove()
+    {
+        transform.Translate(new Vector3(0, 0, 1) * Time.deltaTime * 5);//TODO : Just for test
     }
 
 }
