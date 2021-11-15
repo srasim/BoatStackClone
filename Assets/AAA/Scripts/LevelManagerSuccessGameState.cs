@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelManagerSuccessGameState : MonoBehaviour
+public class LevelManagerSuccessGameState :LevelManagerBaseState
 {
-    // Start is called before the first frame update
-    void Start()
+    LevelManager levelManager;
+
+    public override void EnterToState(LevelManager levelManager)
     {
-        
+        this.levelManager = levelManager;
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void UpdateState()
     {
         
     }
