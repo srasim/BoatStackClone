@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
-    public readonly LevelManagerPreGameState preGame;
-    public readonly LevelManagerInGameState inGame;
-    public readonly LevelManagerFailGameState failGame;
-    public readonly LevelManagerSuccessGameState successGameState;
+    public readonly LevelManagerPreGameState preGame = new LevelManagerPreGameState();
+    public readonly LevelManagerInGameState inGame = new LevelManagerInGameState();
+    public readonly LevelManagerFailGameState failGame = new LevelManagerFailGameState();
+    public readonly LevelManagerSuccessGameState successGameState = new LevelManagerSuccessGameState();
     private LevelManagerBaseState currentState;
 
     public Canvas preGameCanvas;
@@ -17,7 +17,7 @@ public class LevelManager : MonoBehaviour
     
     void Start()
     {
-        TransitionToState(this.preGame);
+        currentState = this.preGame;
     }
     void Update()
     {
