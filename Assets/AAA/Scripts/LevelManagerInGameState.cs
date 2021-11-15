@@ -13,7 +13,7 @@ public class LevelManagerInGameState : LevelManagerBaseState
 
     public override void UpdateState()
     {
-
+        levelManager.player.PlayerMove();
     }
     public override void ExitState()
     {
