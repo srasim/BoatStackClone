@@ -7,10 +7,13 @@ public class PlayerController : MonoBehaviour
     private Vector3 tempPosition;
     public GameObject firstBoat;
     public List<GameObject> boats;
+    float boatsYSize;
+
 
     void Start()
     {
         boats.Add(firstBoat);
+        boatsYSize = firstBoat.GetComponent<MeshFilter>().mesh.bounds.size.y * firstBoat.transform.localScale.y;
     }
 
     // Update is called once per frame
@@ -32,7 +35,8 @@ public class PlayerController : MonoBehaviour
         }
         else if (collision.gameObject.tag == "Wall")
         {
-            for (int i = 0; i < collision.transform.localScale.y; i++)
+            float howManyBoats = collision.GetComponent<MeshFilter>().mesh.bounds.size.y * collision.transform.localScale.y / boatsYSize;
+            for (int i = 0; i < howManyBoats; i++)
             {
                 LoseBoat();
             }
@@ -43,7 +47,7 @@ public class PlayerController : MonoBehaviour
     private void EarnBoat(Collider collision)
     {
         OthersUp();
-        collision.transform.position = new Vector3(this.transform.position.x, 0.5f, this.transform.position.z);
+        collision.transform.position = new Vector3(this.transform.position.x, boatsYSize/2, this.transform.position.z);
         collision.isTrigger = false;
         boats.Add(collision.gameObject);
         collision.gameObject.transform.parent = this.transform;//make child
@@ -51,13 +55,13 @@ public class PlayerController : MonoBehaviour
     private void OthersUp()
     {
         tempPosition = this.transform.position;
-        tempPosition.y += 1;//TODO : Not always 1 ...
+        tempPosition.y += boatsYSize;
         this.transform.position = tempPosition;
     }
     private void OthersDown()
     {
         tempPosition = this.transform.position;
-        tempPosition.y -= 1;//TODO : Not always 1 ...
+        tempPosition.y -= boatsYSize;
         this.transform.position = tempPosition;
 
     }
@@ -73,7 +77,7 @@ public class PlayerController : MonoBehaviour
 
     public void PlayerMove()
     {
-        transform.Translate(new Vector3(0, 0, 1) * Time.deltaTime * 5);//TODO : Just for test
+        transform.Translate(new Vector3(0, 0, 1) * Time.deltaTime * 5);
     }
 
 }
