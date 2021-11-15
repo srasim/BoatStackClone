@@ -8,6 +8,6 @@ public class CameraController : MonoBehaviour
 
     private void LateUpdate()
     {
-        transform.position = new Vector3(0, 10, target.position.z - 5  );//For test
+        transform.position = new Vector3(target.position.x, 10, target.position.z - 5  );//TODO : Make it smooth
     }
 }
