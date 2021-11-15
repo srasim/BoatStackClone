@@ -8,10 +8,17 @@ public class LevelManagerPreGameState : LevelManagerBaseState
     public override void EnterToState(LevelManager levelManager)
     {
         this.levelManager = levelManager;
+        levelManager.preGameCanvas.GetComponent<Canvas>().enabled = true;//Open preGameCanvas
     }
 
     public override void UpdateState()
     {
         
     }
+
+    public override void ExitState()
+    {
+        levelManager.preGameCanvas.GetComponent<Canvas>().enabled = false;//Close preGameCanvas
+    }
+
 }

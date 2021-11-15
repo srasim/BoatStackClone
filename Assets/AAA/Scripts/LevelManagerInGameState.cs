@@ -8,10 +8,16 @@ public class LevelManagerInGameState : LevelManagerBaseState
     public override void EnterToState(LevelManager levelManager)
     {
         this.levelManager = levelManager;
+        levelManager.inGameCanvas.GetComponent<Canvas>().enabled = true;//open inGammeCanvas
     }
 
     public override void UpdateState()
     {
-       
+
+    }
+    public override void ExitState()
+    {
+        levelManager.inGameCanvas.GetComponent<Canvas>().enabled = false;//close inGammeCanvas
     }
 }
+

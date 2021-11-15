@@ -6,5 +6,7 @@ public abstract class LevelManagerBaseState
 {
     public abstract void EnterToState(LevelManager levelManager);
     public abstract void UpdateState();
+
+    public abstract void ExitState();
    
 }

@@ -4,15 +4,30 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public readonly LevelManagerPreGameState preGame;
+    public readonly LevelManagerInGameState inGame;
+    public readonly LevelManagerFailGameState failGame;
+    public readonly LevelManagerSuccessGameState successGameState;
+    private LevelManagerBaseState currentState;
+
+    public Canvas preGameCanvas;
+    public Canvas inGameCanvas;
+    public Canvas failGameCanvas;
+    public Canvas successGameCanvas;
+    
     void Start()
     {
-        
+        TransitionToState(this.preGame);
     }
-
-    // Update is called once per frame
     void Update()
     {
-        
+        currentState.UpdateState();
+    }
+
+    public void TransitionToState(LevelManagerBaseState targetState)
+    {
+        currentState.ExitState();
+        currentState = targetState;
+        currentState.EnterToState(this);
     }
 }

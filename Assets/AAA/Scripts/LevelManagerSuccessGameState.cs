@@ -8,11 +8,18 @@ public class LevelManagerSuccessGameState :LevelManagerBaseState
 
     public override void EnterToState(LevelManager levelManager)
     {
+    
         this.levelManager = levelManager;
+        levelManager.successGameCanvas.GetComponent<Canvas>().enabled = true;//open sucessGameCanvas
     }
 
     public override void UpdateState()
     {
         
     }
+    public override void ExitState()
+    {
+        levelManager.successGameCanvas.GetComponent<Canvas>().enabled = false;//close sucessGameCanvas
+    }
+
 }
