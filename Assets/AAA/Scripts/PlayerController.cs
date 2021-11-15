@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public GameObject firstBoat;
+    public List<GameObject> boats;
     void Start()
     {
-        
+        boats.Add(firstBoat);
     }
 
     // Update is called once per frame
