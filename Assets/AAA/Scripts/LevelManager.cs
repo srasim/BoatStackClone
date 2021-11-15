@@ -10,6 +10,7 @@ public class LevelManager : MonoBehaviour
     public readonly LevelManagerSuccessGameState successGameState = new LevelManagerSuccessGameState();
     private LevelManagerBaseState currentState;
 
+    public PlayerController player;
     public Canvas preGameCanvas;
     public Canvas inGameCanvas;
     public Canvas failGameCanvas;
@@ -18,6 +19,7 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
         currentState = this.preGame;
+        preGame.EnterToState(this);
     }
     void Update()
     {
