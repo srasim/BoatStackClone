@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class LevelManagerPreGameState : LevelManagerBaseState
 {
+    float slideSpeed = 0.01f;
     LevelManager levelManager;
     public override void EnterToState(LevelManager levelManager)
     {
@@ -13,7 +14,15 @@ public class LevelManagerPreGameState : LevelManagerBaseState
 
     public override void UpdateState()
     {
-        
+        if (Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Moved)
+        {
+            levelManager.player.transform.position = new Vector3
+                                                   (levelManager.player.transform.position.x + Input.touches[0].deltaPosition.x * slideSpeed,
+                                                    levelManager.player.transform.position.y,
+                                                    levelManager.player.transform.position.z);
+
+            levelManager.TransitionToState(levelManager.inGame);
+        }
     }
 
     public override void ExitState()
