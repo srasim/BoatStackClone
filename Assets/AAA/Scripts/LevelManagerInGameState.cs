@@ -10,6 +10,7 @@ public class LevelManagerInGameState : LevelManagerBaseState
     {
         this.levelManager = levelManager;
         levelManager.inGameCanvas.GetComponent<Canvas>().enabled = true;//open inGammeCanvas
+        levelManager.player.PlayerDead += PlayerDead;
     }
 
     public override void UpdateState()
@@ -21,13 +22,16 @@ public class LevelManagerInGameState : LevelManagerBaseState
                                                    (levelManager.player.transform.position.x + Input.touches[0].deltaPosition.x * slideSpeed,
                                                     levelManager.player.transform.position.y,
                                                     levelManager.player.transform.position.z);
-
-            levelManager.TransitionToState(levelManager.inGame);
         }
     }
     public override void ExitState()
     {
         levelManager.inGameCanvas.GetComponent<Canvas>().enabled = false;//close inGammeCanvas
+        Debug.Log("exit from inGame");
+    }
+    public void PlayerDead()
+    {
+        levelManager.TransitionToState(levelManager.failGame);
     }
 }
 
