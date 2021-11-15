@@ -58,3 +58,14 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+# Jetbrains files
+.idea/
+
+# Visual Studio files
+.vscode/
+.vsconfig
+
+
+Packages/manifest.json
+Packages/packages-lock.json
+UserSettings/EditorUserSettings.asset
