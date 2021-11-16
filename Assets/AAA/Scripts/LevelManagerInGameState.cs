@@ -1,16 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LevelManagerInGameState : LevelManagerBaseState
 {
     float slideSpeed = 0.002f;
     LevelManager levelManager;
+    int collectedDiamond = 0;
     public override void EnterToState(LevelManager levelManager)
     {
         this.levelManager = levelManager;
         levelManager.inGameCanvas.GetComponent<Canvas>().enabled = true;//open inGammeCanvas
-        levelManager.player.PlayerDead += PlayerDead;
+        levelManager.player.OnPlayerDead += PlayerDead;
+        levelManager.player.OnTriggerDiamond += GetDiamond; ;
     }
 
     public override void UpdateState()
@@ -27,11 +30,15 @@ public class LevelManagerInGameState : LevelManagerBaseState
     public override void ExitState()
     {
         levelManager.inGameCanvas.GetComponent<Canvas>().enabled = false;//close inGammeCanvas
-        Debug.Log("exit from inGame");
     }
-    public void PlayerDead()
+    private void PlayerDead()
     {
         levelManager.TransitionToState(levelManager.failGame);
+    }
+    private void GetDiamond()
+    {
+        collectedDiamond++;
+        levelManager.inGameCanvas.GetComponentInChildren<Text>().text = collectedDiamond.ToString();
     }
 }
 

@@ -9,6 +9,9 @@ public class PlayerController : MonoBehaviour
     public List<GameObject> boats;
     float boatsYSize;
 
+    public delegate void PlayerInfoForStates();
+    public event PlayerInfoForStates OnPlayerDead;
+    public event PlayerInfoForStates OnTriggerDiamond;
 
     void Start()
     {
@@ -42,6 +45,13 @@ public class PlayerController : MonoBehaviour
             }
             Destroy(collision.gameObject);
         }
+        else if(collision.gameObject.tag == "Diamond")
+        {
+            if(OnTriggerDiamond != null)
+            {
+                OnTriggerDiamond();
+            }
+        }
     }
 
     private void EarnBoat(Collider collision)
@@ -67,14 +77,18 @@ public class PlayerController : MonoBehaviour
     }
     private void LoseBoat()
     {
-        if (boats.Count != 0)
+        OthersDown();
+        Destroy(boats[boats.Count - 1]);
+        boats.RemoveAt(boats.Count - 1);
+
+        if (boats.Count < 1)
         {
-            OthersDown();
-            Destroy(boats[boats.Count - 1]);
-            boats.RemoveAt(boats.Count - 1);
+            if (OnPlayerDead != null)
+            {
+                OnPlayerDead();
+            }
         }
     }
-
     public void PlayerMove()
     {
         transform.Translate(new Vector3(0, 0, 1) * Time.deltaTime * 5);
