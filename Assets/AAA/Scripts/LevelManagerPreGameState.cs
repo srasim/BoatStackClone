@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LevelManagerPreGameState : LevelManagerBaseState
 {
-    float slideSpeed = 0.002f;
+    float slideSpeed = 0.01f;
     LevelManager levelManager;
     public override void EnterToState(LevelManager levelManager)
     {

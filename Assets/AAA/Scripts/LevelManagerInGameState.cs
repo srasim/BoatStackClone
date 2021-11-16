@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class LevelManagerInGameState : LevelManagerBaseState
 {
-    float slideSpeed = 0.002f;
+    float slideSpeed = 0.01f;
     LevelManager levelManager;
     
     public override void EnterToState(LevelManager levelManager)
@@ -39,7 +39,7 @@ public class LevelManagerInGameState : LevelManagerBaseState
     private void GetDiamond()
     {
         levelManager.player.collectedDiamond++;
-        levelManager.inGameCanvas.GetComponentInChildren<TMPro.TMP_Text>().text = levelManager.player.collectedDiamond.ToString();
+        levelManager.inGameCanvas.GetComponentInChildren<TMPro.TMP_Text>().text = levelManager.player.collectedDiamond .ToString();
     }
 
     private void PlayerOnFinish()
