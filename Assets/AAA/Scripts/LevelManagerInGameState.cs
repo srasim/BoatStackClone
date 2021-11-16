@@ -13,7 +13,8 @@ public class LevelManagerInGameState : LevelManagerBaseState
         this.levelManager = levelManager;
         levelManager.inGameCanvas.GetComponent<Canvas>().enabled = true;//open inGammeCanvas
         levelManager.player.OnPlayerDead += PlayerDead;
-        levelManager.player.OnTriggerDiamond += GetDiamond; ;
+        levelManager.player.OnTriggerDiamond += GetDiamond; 
+        levelManager.player.OnFinish += PlayerOnFinish;
     }
 
     public override void UpdateState()
@@ -39,6 +40,11 @@ public class LevelManagerInGameState : LevelManagerBaseState
     {
         collectedDiamond++;
         levelManager.inGameCanvas.GetComponentInChildren<TMPro.TMP_Text>().text = collectedDiamond.ToString();
+    }
+
+    private void PlayerOnFinish()
+    {
+        levelManager.TransitionToState(levelManager.successGame);
     }
 }
 
