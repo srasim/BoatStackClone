@@ -8,9 +8,17 @@ public class LevelManagerSuccessGameState :LevelManagerBaseState
 
     public override void EnterToState(LevelManager levelManager)
     {
-    
+
         this.levelManager = levelManager;
-        levelManager.successGameCanvas.GetComponent<Canvas>().enabled = true;//open sucessGameCanvas
+        if (levelManager.isItLastLevel)
+        {
+            levelManager.successGameCanvas.transform.GetChild(1).gameObject.SetActive(false);//If it is 3. level , disable next button.
+            levelManager.successGameCanvas.GetComponent<Canvas>().enabled = true;//open sucessGameCanvas
+        }
+        else
+        {
+            levelManager.successGameCanvas.GetComponent<Canvas>().enabled = true;//open sucessGameCanvas
+        }
     }
 
     public override void UpdateState()
