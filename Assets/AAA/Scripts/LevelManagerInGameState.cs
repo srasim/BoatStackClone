@@ -7,7 +7,7 @@ public class LevelManagerInGameState : LevelManagerBaseState
 {
     float slideSpeed = 0.002f;
     LevelManager levelManager;
-    int collectedDiamond = 0;
+    
     public override void EnterToState(LevelManager levelManager)
     {
         this.levelManager = levelManager;
@@ -38,8 +38,8 @@ public class LevelManagerInGameState : LevelManagerBaseState
     }
     private void GetDiamond()
     {
-        collectedDiamond++;
-        levelManager.inGameCanvas.GetComponentInChildren<TMPro.TMP_Text>().text = collectedDiamond.ToString();
+        levelManager.player.collectedDiamond++;
+        levelManager.inGameCanvas.GetComponentInChildren<TMPro.TMP_Text>().text = levelManager.player.collectedDiamond.ToString();
     }
 
     private void PlayerOnFinish()

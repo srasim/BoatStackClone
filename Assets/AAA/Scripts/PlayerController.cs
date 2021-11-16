@@ -7,7 +7,9 @@ public class PlayerController : MonoBehaviour
     private Vector3 tempPosition;
     public GameObject firstBoat;
     public List<GameObject> boats;
+    public int collectedDiamond = 0;
     float boatsYSize;
+   
 
     public delegate void PlayerInfoForStates();
     public event PlayerInfoForStates OnPlayerDead;
