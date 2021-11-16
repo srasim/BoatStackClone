@@ -47,6 +47,7 @@ public class PlayerController : MonoBehaviour
         }
         else if(collision.gameObject.tag == "Diamond")
         {
+            Destroy(collision.gameObject);
             if(OnTriggerDiamond != null)
             {
                 OnTriggerDiamond();
