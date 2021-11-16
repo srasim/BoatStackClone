@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
 
     public delegate void PlayerInfoForStates();
     public event PlayerInfoForStates OnPlayerDead;
+    public event PlayerInfoForStates OnFinish;
     public event PlayerInfoForStates OnTriggerDiamond;
 
     void Start()
@@ -51,6 +52,13 @@ public class PlayerController : MonoBehaviour
             if(OnTriggerDiamond != null)
             {
                 OnTriggerDiamond();
+            }
+        }
+        else if(collision.gameObject.tag == "Finish")
+        {
+            if(OnFinish != null)
+            {
+                OnFinish();
             }
         }
     }
@@ -94,7 +102,7 @@ public class PlayerController : MonoBehaviour
     }
     public void PlayerMove()
     {
-        transform.Translate(new Vector3(0, 0, 1) * Time.deltaTime * 5);
+        transform.Translate(new Vector3(0, 0, 1) * Time.deltaTime * 6);
     }
 
 }
