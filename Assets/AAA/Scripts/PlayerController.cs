@@ -78,10 +78,12 @@ public class PlayerController : MonoBehaviour
     }
     private void LoseBoat()
     {
-        OthersDown();
-        Destroy(boats[boats.Count - 1]);
-        boats.RemoveAt(boats.Count - 1);
-
+        if (boats.Count != 0)
+        {
+            OthersDown();
+            Destroy(boats[boats.Count - 1]);
+            boats.RemoveAt(boats.Count - 1);
+        }
         if (boats.Count < 1)
         {
             if (OnPlayerDead != null)
