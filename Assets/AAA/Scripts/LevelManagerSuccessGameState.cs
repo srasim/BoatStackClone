@@ -19,6 +19,7 @@ public class LevelManagerSuccessGameState :LevelManagerBaseState
         {
             levelManager.successGameCanvas.GetComponent<Canvas>().enabled = true;//open sucessGameCanvas
         }
+        CalculateScore();
     }
 
     public override void UpdateState()
@@ -28,6 +29,12 @@ public class LevelManagerSuccessGameState :LevelManagerBaseState
     public override void ExitState()
     {
         levelManager.successGameCanvas.GetComponent<Canvas>().enabled = false;//close sucessGameCanvas
+    }
+    private void CalculateScore()
+    {
+        int score = levelManager.player.collectedDiamond * levelManager.player.boats.Count * 10;
+
+        levelManager.successGameCanvas.transform.GetChild(3).gameObject.GetComponent<TMPro.TMP_Text>().text = score.ToString();
     }
 
 }
