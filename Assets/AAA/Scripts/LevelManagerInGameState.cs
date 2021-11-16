@@ -38,7 +38,7 @@ public class LevelManagerInGameState : LevelManagerBaseState
     private void GetDiamond()
     {
         collectedDiamond++;
-        levelManager.inGameCanvas.GetComponentInChildren<Text>().text = collectedDiamond.ToString();
+        levelManager.inGameCanvas.GetComponentInChildren<TMPro.TMP_Text>().text = collectedDiamond.ToString();
     }
 }
 
