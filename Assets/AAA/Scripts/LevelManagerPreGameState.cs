@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class LevelManagerPreGameState : LevelManagerBaseState
 {
-    float slideSpeed = 0.01f;
+    float swipeSpeed = 0.01f;
     LevelManager levelManager;
     Vector3 lastMousePosition;
     Vector3 swipe;
+    Vector3 tempPlayerPosition;
     public override void EnterToState(LevelManager levelManager)
     {
         this.levelManager = levelManager;
@@ -24,10 +25,15 @@ public class LevelManagerPreGameState : LevelManagerBaseState
         {
             swipe = Input.mousePosition - lastMousePosition;
 
-            levelManager.player.transform.position = new Vector3
-                                                   (levelManager.player.transform.position.x + swipe.x * slideSpeed,
-                                                    levelManager.player.transform.position.y,
-                                                    levelManager.player.transform.position.z);
+            tempPlayerPosition = levelManager.player.transform.position;
+            tempPlayerPosition.x += swipe.x*swipeSpeed;
+
+            if (tempPlayerPosition.x > 4.5f)//TODO : Plane bounds should be different
+                tempPlayerPosition.x = 4.5f;
+            else if (tempPlayerPosition.x < -4.5f)
+                tempPlayerPosition.x = -4.5f;
+
+            levelManager.player.transform.position = tempPlayerPosition;
 
             lastMousePosition = Input.mousePosition;
             levelManager.inGame.lastMousePosition = this.lastMousePosition;//Set inGame 's lastMousePosition 
