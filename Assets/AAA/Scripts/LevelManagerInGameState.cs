@@ -7,7 +7,7 @@ public class LevelManagerInGameState : LevelManagerBaseState
 {
     float slideSpeed = 0.01f;
     LevelManager levelManager;
-    Vector3 lastMousePosition;
+    public Vector3 lastMousePosition;
     Vector3 swipe;
     
     public override void EnterToState(LevelManager levelManager)

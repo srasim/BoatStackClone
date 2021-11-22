@@ -30,6 +30,7 @@ public class LevelManagerPreGameState : LevelManagerBaseState
                                                     levelManager.player.transform.position.z);
 
             lastMousePosition = Input.mousePosition;
+            levelManager.inGame.lastMousePosition = this.lastMousePosition;//Set inGame 's lastMousePosition 
             levelManager.TransitionToState(levelManager.inGame);
         }
     
