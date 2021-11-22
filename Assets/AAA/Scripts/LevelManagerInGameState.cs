@@ -10,7 +10,10 @@ public class LevelManagerInGameState : LevelManagerBaseState
     public Vector3 lastMousePosition;
     Vector3 tempPlayerPosition;
     Vector3 swipe;
-    
+    private float planeXSize;
+    private float boatXSize;
+
+
     public override void EnterToState(LevelManager levelManager)
     {
         this.levelManager = levelManager;
@@ -18,6 +21,8 @@ public class LevelManagerInGameState : LevelManagerBaseState
         levelManager.player.OnPlayerDead += PlayerDead;
         levelManager.player.OnTriggerDiamond += GetDiamond; 
         levelManager.player.OnFinish += PlayerOnFinish;
+        planeXSize = GameObject.FindGameObjectWithTag("Plane").GetComponent<MeshFilter>().mesh.bounds.size.x;
+        boatXSize = GameObject.FindGameObjectWithTag("Boat").GetComponent<MeshFilter>().mesh.bounds.size.x;
     }
 
     public override void UpdateState()
@@ -34,10 +39,7 @@ public class LevelManagerInGameState : LevelManagerBaseState
             tempPlayerPosition = levelManager.player.transform.position;
             tempPlayerPosition.x += swipe.x*swipeSpeed;
 
-            if (tempPlayerPosition.x > 4.5f)//TODO : Plane bounds should be different
-                tempPlayerPosition.x = 4.5f;
-            else if (tempPlayerPosition.x <- 4.5f)
-                tempPlayerPosition.x = -4.5f;
+            CheckBounds();
 
             levelManager.player.transform.position = tempPlayerPosition;
 
@@ -61,6 +63,13 @@ public class LevelManagerInGameState : LevelManagerBaseState
     private void PlayerOnFinish()
     {
         levelManager.TransitionToState(levelManager.successGame);
+    }
+    private void CheckBounds()
+    {
+        if (tempPlayerPosition.x > planeXSize / 2 - boatXSize / 2)
+            tempPlayerPosition.x = planeXSize / 2 - boatXSize / 2;
+        else if (tempPlayerPosition.x < -(planeXSize / 2 - boatXSize / 2))
+            tempPlayerPosition.x = -(planeXSize / 2 - boatXSize / 2);
     }
 }
 
