@@ -1336,7 +1336,7 @@ GameObject:
   - component: {fileID: 1023855062}
   m_Layer: 0
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: Plane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1512,6 +1512,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firstBoat: {fileID: 887246941}
   boats: []
+  collectedDiamond: 0
 --- !u!54 &1174924953
 Rigidbody:
   m_ObjectHideFlags: 0
