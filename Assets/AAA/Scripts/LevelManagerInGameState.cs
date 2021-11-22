@@ -7,6 +7,8 @@ public class LevelManagerInGameState : LevelManagerBaseState
 {
     float slideSpeed = 0.01f;
     LevelManager levelManager;
+    Vector3 lastMousePosition;
+    Vector3 swipe;
     
     public override void EnterToState(LevelManager levelManager)
     {
@@ -20,12 +22,19 @@ public class LevelManagerInGameState : LevelManagerBaseState
     public override void UpdateState()
     {
         levelManager.player.PlayerMove();
-        if (Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Moved)
+        if (Input.GetMouseButtonDown(0))
         {
+            lastMousePosition = Input.mousePosition;
+        }
+        else if (Input.GetMouseButton(0))
+        {
+            swipe = Input.mousePosition - lastMousePosition;
+
             levelManager.player.transform.position = new Vector3
-                                                   (levelManager.player.transform.position.x + Input.touches[0].deltaPosition.x * slideSpeed,
+                                                   (levelManager.player.transform.position.x + swipe.x * slideSpeed,
                                                     levelManager.player.transform.position.y,
                                                     levelManager.player.transform.position.z);
+            lastMousePosition = Input.mousePosition;
         }
     }
     public override void ExitState()
